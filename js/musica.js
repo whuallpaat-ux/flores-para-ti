@@ -9,11 +9,15 @@
   const boton = document.getElementById('musica');
   const texto = boton.querySelector('.musica-texto');
 
-  const archivo = new Audio('audio/cancion.mp3');
+  const archivo = new Audio('audio/cancion.mp3?v=3');
   archivo.loop = true;
   archivo.volume = 0.8;
+  archivo.preload = 'auto';
 
-  let usarArchivo = true;
+  // La cajita musical solo se usa si el archivo de la canción no carga
+  let archivoFalla = false;
+  archivo.addEventListener('error', () => { archivoFalla = true; });
+
   let sonando = false;
 
 
@@ -151,21 +155,21 @@
     if (sonando) return;
     sonando = true;
     mostrar();
-    if (usarArchivo) {
+    if (!archivoFalla && !archivo.error) {
       try {
         await archivo.play();
         return;
       } catch (e) {
-        // El navegador aún no deja sonar: esperamos al siguiente toque
-        if (e && e.name === 'NotAllowedError') {
+        if (!archivo.error) {
+          // Bloqueado o interrumpido: se vuelve a intentar con el siguiente toque
           sonando = false;
           mostrar();
           return;
         }
-        usarArchivo = false; // no hay canción: usamos la cajita musical
+        archivoFalla = true;
       }
     }
-    if (sonando) cajita.start();
+    if (sonando) cajita.start(); // solo si la canción no existe o está dañada
   }
 
   function pause() {
@@ -185,13 +189,7 @@
 
   /* ---------- Arranque automático ---------- */
 
-  // Algunos navegadores dejan sonar al abrir la página: lo intentamos sin avisar
-  archivo.play().then(() => {
-    sonando = true;
-    mostrar();
-  }).catch(() => {});
-
-  // Si no se pudo, la música empieza con el primer toque en cualquier parte.
+  // La música empieza con el primer toque en cualquier parte.
   // Se usa "click" porque en el celular es el único momento en que el
   // navegador ya cuenta el toque como permiso para sonar.
   function primerToque(e) {
