@@ -10,6 +10,7 @@
    8. Pantallas pequeñas
    9. Movimiento reducido
    10. Bienvenida (pantalla "Toca para abrir")
+   11. Guardar como app
    ========================================================== */
 
 
@@ -449,4 +450,84 @@ canvas {
   .bienvenida { transition: none; }
   .bienvenida-sol,
   .bienvenida-pista { animation: none; }
+}
+
+
+/* 11. Guardar como app --------------------------------------- */
+
+.guardar {
+  position: fixed;
+  left: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 24px -12px var(--shadow);
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.guardar:hover { opacity: 0.9; }
+.guardar:active { transform: scale(0.97); }
+
+.guardar:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.guardar svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Ventanita con los pasos para instalar */
+.ayuda {
+  width: min(420px, calc(100% - 32px));
+  padding: 28px 24px 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 30px 60px -20px var(--shadow);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.ayuda::backdrop { background: rgba(10, 12, 8, 0.55); }
+
+.ayuda h2 {
+  margin: 0 0 8px;
+  font-size: 40px;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.ayuda p { margin: 0 0 12px; color: var(--muted); }
+
+.ayuda ol {
+  margin: 0 0 20px;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.ayuda .accion {
+  border: 0;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
 }

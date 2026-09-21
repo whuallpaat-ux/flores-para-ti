@@ -7,6 +7,17 @@
 <meta property="og:title" content="Para ti 🌻">
 <meta property="og:description" content="Pronóstico de hoy: soleado, con flores amarillas. Toca el sobre 💛">
 <title>Flores para ti</title>
+
+<!-- App instalable en el celular -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1D15">
+<link rel="icon" type="image/png" href="iconos/icono-192.png">
+<link rel="apple-touch-icon" href="iconos/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Para ti 🌻">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Figtree:wght@400;500&family=Great+Vibes&display=swap">
@@ -61,10 +72,24 @@
   <span class="musica-texto">Poner música</span>
 </button>
 
+<!-- Guardar como app en el celular -->
+<button id="guardar" class="guardar" type="button" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+  <span>Guardar</span>
+</button>
+
+<dialog id="ayuda-guardar" class="ayuda">
+  <h2 class="script">Guárdalo en tu celular</h2>
+  <p>Así tendrás tus flores como una app, y podrás abrirlas cuando quieras, incluso sin internet:</p>
+  <ol id="pasos-guardar"></ol>
+  <button id="cerrar-ayuda" class="accion" type="button">Entendido</button>
+</dialog>
+
 <script src="js/flores.js?v=3"></script>
 <script src="js/ramo.js?v=3"></script>
 <script src="js/musica.js?v=3"></script>
 <script src="js/dedicatoria.js?v=3"></script>
 <script src="js/bienvenida.js?v=3"></script>
+<script src="js/instalar.js?v=3"></script>
 </body>
 </html>
