@@ -1,0 +1,376 @@
+/* ==========================================================
+   Flores para ti — estilos
+   1. Colores (claro / oscuro)
+   2. Base
+   3. Distribución a pantalla completa
+   4. Ramo
+   5. Sobre (botón que abre la dedicatoria)
+   6. Carta
+   7. Botón de música
+   8. Pantallas pequeñas
+   9. Movimiento reducido
+   ========================================================== */
+
+
+/* 1. Colores ------------------------------------------------ */
+
+:root {
+  --ground: #EDEFE4;
+  --glow: rgba(255, 249, 226, 0.95);
+  --ink: #2C3124;
+  --muted: #6B715E;
+  --line: #CFD4C1;
+  --accent: #A9660C;
+  --btn-bg: #2C3124;
+  --btn-ink: #F4F2E6;
+  --shadow: rgba(70, 60, 18, 0.22);
+  --paper: #FBF8EE;
+  color-scheme: light;
+
+  /* Espacio vertical disponible */
+  --pantalla: 100vh;
+  --margen: clamp(16px, 3vh, 32px);
+}
+
+@supports (height: 100dvh) {
+  :root { --pantalla: 100dvh; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #1A1D15;
+    --glow: rgba(110, 92, 30, 0.32);
+    --ink: #ECEADB;
+    --muted: #A3A791;
+    --line: #383D2E;
+    --accent: #F2B92A;
+    --btn-bg: #F2C530;
+    --btn-ink: #1A1D15;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --paper: #24281D;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #1A1D15;
+  --glow: rgba(110, 92, 30, 0.32);
+  --ink: #ECEADB;
+  --muted: #A3A791;
+  --line: #383D2E;
+  --accent: #F2B92A;
+  --btn-bg: #F2C530;
+  --btn-ink: #1A1D15;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --paper: #24281D;
+  color-scheme: dark;
+}
+
+
+/* 2. Base --------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body { background: var(--ground); }
+
+body {
+  margin: 0;
+  padding-inline: 16px;
+  color: var(--ink);
+  font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.script {
+  font-family: "Great Vibes", "Snell Roundhand", "Segoe Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--accent);
+}
+
+
+/* 3. Distribución a pantalla completa ----------------------- */
+
+main {
+  height: var(--pantalla);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-block: var(--margen);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.ramo,
+.lado {
+  min-width: 0;
+  max-height: 100%;
+}
+
+
+/* 4. Ramo --------------------------------------------------- */
+
+.ramo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* El ramo es 4:5; su ancho se limita para que quepa a lo alto */
+.stage {
+  width: min(100%, calc((var(--pantalla) - 2 * var(--margen)) * 0.8));
+  aspect-ratio: 4 / 5;
+  background: radial-gradient(ellipse 60% 55% at 50% 42%, var(--glow) 0%, transparent 100%);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 5. Sobre -------------------------------------------------- */
+
+.sobre {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(28px, 6vh, 56px) 24px clamp(28px, 5vh, 44px);
+  font: inherit;
+  color: var(--ink);
+  text-align: center;
+  background:
+    linear-gradient(to bottom right, transparent calc(50% - 0.5px), var(--line) 50%, transparent calc(50% + 0.5px)) left top / 50% 46% no-repeat,
+    linear-gradient(to bottom left, transparent calc(50% - 0.5px), var(--line) 50%, transparent calc(50% + 0.5px)) right top / 50% 46% no-repeat,
+    var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 18px 40px -24px var(--shadow);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sobre:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 48px -24px var(--shadow);
+}
+
+.sobre:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.sello {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-top: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F9D862, #D99A1B 60%, #A9660C);
+  box-shadow: 0 4px 10px -2px rgba(120, 70, 0, 0.45), inset 0 0 0 4px rgba(255, 240, 180, 0.35);
+  font-family: "Great Vibes", "Snell Roundhand", "Segoe Script", cursive;
+  font-size: 38px;
+  line-height: 1;
+  color: #FFF6D5;
+}
+
+.para {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.sobre-nombre {
+  font-size: clamp(56px, 10vh, 80px);
+  line-height: 1;
+}
+
+.pronostico {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.accion {
+  margin-top: 12px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* 6. Carta -------------------------------------------------- */
+
+/* El tamaño de letra depende del alto para que la carta quepa entera */
+.carta {
+  max-height: calc(var(--pantalla) - 2 * var(--margen));
+  overflow-y: auto;
+  padding: clamp(20px, 4.5vh, 44px) clamp(22px, 3.5vw, 48px) clamp(16px, 3vh, 32px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 18px 40px -24px var(--shadow);
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(14px, 2.1vh, 20px);
+  line-height: 1.5;
+  animation: abrir 0.6s ease both;
+}
+
+.carta h1 {
+  margin: 0 0 0.6em;
+  font-size: clamp(40px, 7.5vh, 68px);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.carta p {
+  margin: 0 0 0.8em;
+  text-wrap: pretty;
+}
+
+.carta .firma {
+  margin-top: 1.2em;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.autor { font-size: 1.6em; }
+
+.cerrar {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.cerrar:hover { color: var(--ink); }
+
+.cerrar:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@keyframes abrir {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+
+/* 7. Botón de música (fijo abajo a la derecha) -------------- */
+
+.musica {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 24px -12px var(--shadow);
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.musica:hover { opacity: 0.9; }
+.musica:active { transform: scale(0.97); }
+
+.musica:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.icono-play {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Barritas que se mueven mientras suena */
+.ondas {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  width: 18px;
+  height: 16px;
+}
+
+.ondas i {
+  flex: 1;
+  height: 40%;
+  border-radius: 1px;
+  background: currentColor;
+  animation: onda 0.9s ease-in-out infinite;
+}
+
+.ondas i:nth-child(2) { animation-delay: -0.3s; }
+.ondas i:nth-child(3) { animation-delay: -0.6s; }
+
+.musica[aria-pressed="true"] .icono-play { display: none; }
+.musica[aria-pressed="true"] .ondas { display: inline-flex; }
+
+@keyframes onda {
+  0%, 100% { height: 30%; }
+  50% { height: 100%; }
+}
+
+
+/* 8. Pantallas pequeñas: una columna y se puede bajar -------- */
+
+@media (max-width: 820px) {
+  main {
+    height: auto;
+    max-width: 580px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding-bottom: 88px; /* espacio para el botón de música */
+  }
+
+  .stage { width: 100%; }
+
+  .carta {
+    max-height: none;
+    font-size: clamp(18px, 4.6vw, 20px);
+  }
+}
+
+
+/* 9. Movimiento reducido ------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .carta { animation: none; }
+  .sobre { transition: none; }
+  .ondas i { animation: none; height: 70%; }
+}
