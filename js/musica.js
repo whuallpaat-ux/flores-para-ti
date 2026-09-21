@@ -156,6 +156,12 @@
         await archivo.play();
         return;
       } catch (e) {
+        // El navegador aún no deja sonar: esperamos al siguiente toque
+        if (e && e.name === 'NotAllowedError') {
+          sonando = false;
+          mostrar();
+          return;
+        }
         usarArchivo = false; // no hay canción: usamos la cajita musical
       }
     }
@@ -185,15 +191,21 @@
     mostrar();
   }).catch(() => {});
 
-  // Si no se pudo, la música empieza con el primer toque en cualquier parte
+  // Si no se pudo, la música empieza con el primer toque en cualquier parte.
+  // Se usa "click" porque en el celular es el único momento en que el
+  // navegador ya cuenta el toque como permiso para sonar.
   function primerToque(e) {
-    document.removeEventListener('pointerdown', primerToque);
-    document.removeEventListener('keydown', primerToque);
     if (boton.contains(e.target)) return; // el botón ya se encarga
     play();
   }
-  document.addEventListener('pointerdown', primerToque);
+  document.addEventListener('click', primerToque);
   document.addEventListener('keydown', primerToque);
+
+  // Cuando la música ya suena, dejamos de escuchar los toques
+  archivo.addEventListener('playing', () => {
+    document.removeEventListener('click', primerToque);
+    document.removeEventListener('keydown', primerToque);
+  });
 
   window.Musica = { play, pause, toggle };
 })();
