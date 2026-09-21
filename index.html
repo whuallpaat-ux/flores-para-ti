@@ -14,12 +14,19 @@
 </head>
 <body>
 
+<!-- Bienvenida: el primer toque abre la página y empieza la música -->
+<button id="bienvenida" class="bienvenida" type="button">
+  <span class="bienvenida-sol" aria-hidden="true">☀</span>
+  <span class="script bienvenida-titulo">Tengo algo para ti</span>
+  <span class="bienvenida-pista">Toca para abrir 🌻</span>
+</button>
+
 <main>
 
   <!-- Ramo -->
   <section class="ramo">
     <div class="stage" id="stage">
-      <canvas id="ramo" role="img" aria-label="Ramo de siete gerberas amarillas atado con un lazo y una tarjeta que dice Para ti"></canvas>
+      <canvas id="ramo" role="img" aria-label="Ramo de siete gerberas amarillas atado con un lazo y una tarjeta que dice Senamhi"></canvas>
     </div>
   </section>
 
@@ -58,5 +65,6 @@
 <script src="js/ramo.js"></script>
 <script src="js/musica.js"></script>
 <script src="js/dedicatoria.js"></script>
+<script src="js/bienvenida.js"></script>
 </body>
 </html>

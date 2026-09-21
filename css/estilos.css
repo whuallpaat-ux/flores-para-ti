@@ -9,6 +9,7 @@
    7. Botón de música
    8. Pantallas pequeñas
    9. Movimiento reducido
+   10. Bienvenida (pantalla "Toca para abrir")
    ========================================================== */
 
 
@@ -373,4 +374,79 @@ canvas {
   .carta { animation: none; }
   .sobre { transition: none; }
   .ondas i { animation: none; height: 70%; }
+}
+
+
+/* 10. Bienvenida (pantalla "Toca para abrir") --------------- */
+
+.bienvenida {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 16px;
+  border: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, var(--glow) 0%, var(--ground) 70%);
+  color: var(--ink);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.bienvenida.saliendo {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.bienvenida:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -8px;
+}
+
+.bienvenida-sol {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F9D862, #D99A1B 60%, #A9660C);
+  box-shadow: 0 0 0 10px rgba(246, 195, 36, 0.14), 0 0 60px rgba(246, 195, 36, 0.45);
+  font-size: 40px;
+  line-height: 1;
+  color: #FFF6D5;
+  animation: latido 2.4s ease-in-out infinite;
+}
+
+.bienvenida-titulo {
+  font-size: clamp(48px, 12vw, 80px);
+  line-height: 1.05;
+}
+
+.bienvenida-pista {
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  animation: parpadeo 2.4s ease-in-out infinite;
+}
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bienvenida { transition: none; }
+  .bienvenida-sol,
+  .bienvenida-pista { animation: none; }
 }

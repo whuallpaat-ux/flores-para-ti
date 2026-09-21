@@ -176,5 +176,24 @@
 
   boton.addEventListener('click', toggle);
 
+
+  /* ---------- Arranque automático ---------- */
+
+  // Algunos navegadores dejan sonar al abrir la página: lo intentamos sin avisar
+  archivo.play().then(() => {
+    sonando = true;
+    mostrar();
+  }).catch(() => {});
+
+  // Si no se pudo, la música empieza con el primer toque en cualquier parte
+  function primerToque(e) {
+    document.removeEventListener('pointerdown', primerToque);
+    document.removeEventListener('keydown', primerToque);
+    if (boton.contains(e.target)) return; // el botón ya se encarga
+    play();
+  }
+  document.addEventListener('pointerdown', primerToque);
+  document.addEventListener('keydown', primerToque);
+
   window.Musica = { play, pause, toggle };
 })();

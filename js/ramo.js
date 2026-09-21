@@ -9,7 +9,7 @@
 
   /* ---------- Configuración ---------- */
 
-  const NAME = 'Para ti';
+  const NAME = 'Senamhi';
   const RATIO = 1.25; // alto / ancho del lienzo (4:5)
 
   // Posición (fracción del ancho), tamaño y orientación de cada flor.
