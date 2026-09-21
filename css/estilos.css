@@ -392,7 +392,8 @@ canvas {
   gap: 16px;
   padding: 24px 16px;
   border: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 45%, var(--glow) 0%, var(--ground) 70%);
+  /* Fondo sólido: el resplandor va encima del color de fondo para que no se vea lo de atrás */
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, var(--glow) 0%, transparent 70%), var(--ground);
   color: var(--ink);
   font: inherit;
   text-align: center;

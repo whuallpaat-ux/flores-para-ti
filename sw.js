@@ -3,20 +3,20 @@
    Al cambiar cualquier archivo, sube el número de VERSION.
    ========================================================== */
 
-const VERSION = 'flores-para-ti-v3';
+const VERSION = 'flores-para-ti-v4';
 
 const ARCHIVOS = [
   './',
   './index.html',
   './manifest.json',
-  './css/estilos.css?v=3',
-  './js/flores.js?v=3',
-  './js/ramo.js?v=3',
-  './js/musica.js?v=3',
-  './js/dedicatoria.js?v=3',
-  './js/bienvenida.js?v=3',
-  './js/instalar.js?v=3',
-  './audio/cancion.mp3?v=3',
+  './css/estilos.css?v=4',
+  './js/flores.js?v=4',
+  './js/ramo.js?v=4',
+  './js/musica.js?v=4',
+  './js/dedicatoria.js?v=4',
+  './js/bienvenida.js?v=4',
+  './js/instalar.js?v=4',
+  './audio/cancion.mp3?v=4',
   './iconos/icono-192.png',
   './iconos/icono-512.png',
   './iconos/apple-touch-icon.png',

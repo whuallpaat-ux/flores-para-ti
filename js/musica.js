@@ -9,7 +9,7 @@
   const boton = document.getElementById('musica');
   const texto = boton.querySelector('.musica-texto');
 
-  const archivo = new Audio('audio/cancion.mp3?v=3');
+  const archivo = new Audio('audio/cancion.mp3?v=4');
   archivo.loop = true;
   archivo.volume = 0.8;
   archivo.preload = 'auto';
